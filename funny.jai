@@ -1,5 +1,5 @@
 // comment this line when u want to build
-#run { (#import "Compiler").set_build_options_dc(.{do_output=false}); main(); } // set to script mode
+#run { (#import "Compiler").set_build_options_dc(.{do_output=false}); } // set to script mode
 
 #import "Basic";
 #import "Window_Creation";
@@ -11,6 +11,24 @@
 window: *void;
 window_width  := 640;
 window_height := 480;
+
+// TODO: finish grid space stuff and make it like snake kind of
+Position :: struct {
+    row: int; col: int;
+}
+
+Tile_State :: struct {
+    has_item: bool;
+    has_player: bool;
+}
+NUM_ROWS :: 10;
+NUM_COLS :: 10;
+board: [NUM_ROWS*NUM_COLS]Tile_State;
+board_get :: inline (using pos: Position) -> *Tile_State { return *board[row * NUM_ROWS + col]; }
+
+world_to_screen :: (using pos: Position) -> Vector2 {
+    return .{};
+}
 
 next_move: enum {
     NONE     :: 0;
